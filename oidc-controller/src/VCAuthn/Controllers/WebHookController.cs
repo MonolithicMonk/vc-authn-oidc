@@ -25,16 +25,16 @@ namespace VCAuthn.Controllers
             _config = config;
             _logger = logger;
         }
-        
-        
+
+
         [HttpPost("/{apiKey}/topic/{topic}")]
-        public Task<ActionResult> GetTopicUpdateWithApiKey([FromRoute]string apiKey, [FromRoute]string topic, [FromBody]PresentationUpdate update)
+        public Task<ActionResult> GetTopicUpdateWithApiKey([FromRoute] string apiKey, [FromRoute] string topic, [FromBody] PresentationUpdate update)
         {
             return ProcessWebhook(apiKey, topic, update);
         }
 
         [HttpPost("/topic/{topic}")]
-        public Task<ActionResult> GetTopicUpdate([FromRoute]string topic, [FromBody]PresentationUpdate update)
+        public Task<ActionResult> GetTopicUpdate([FromRoute] string topic, [FromBody] PresentationUpdate update)
         {
             return ProcessWebhook(null, topic, update);
         }
@@ -100,7 +100,7 @@ namespace VCAuthn.Controllers
 
             [JsonProperty("state")]
             public string State { get; set; }
-            
+
             [JsonProperty("thread_id")]
             public string ThreadId { get; set; }
 
@@ -109,6 +109,9 @@ namespace VCAuthn.Controllers
 
             [JsonProperty("presentation")]
             public JObject Presentation { get; set; }
+
+            [JsonProperty("verified")]
+            public Boolean Verified { get; set; }
         }
     }
 }

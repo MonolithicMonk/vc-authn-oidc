@@ -13,6 +13,11 @@ namespace VCAuthn.Utils
             {
                 Version = configuration.Version,
                 Name = configuration.Name
+                // NonRevoked = new RevocationInterval()
+                // {
+                //     From = 0,
+                //     To = new DateTimeOffset(DateTime.Now, TimeSpan.Zero).ToUnixTimeSeconds()
+                // }
             };
 
             configuration.RequestedAttributes.ForEach(delegate (RequestedAttribute reqAttribute)
@@ -47,7 +52,7 @@ namespace VCAuthn.Utils
             {
                 {"proof_request", presentationRequest_1_0}
             };
-            return JsonConvert.SerializeObject(requestBody);
+            return JsonConvert.SerializeObject(requestBody, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
         }
 
         public static List<PresentationAttachment> GeneratePresentationAttachments(this PresentationRequest presentationRequest)
